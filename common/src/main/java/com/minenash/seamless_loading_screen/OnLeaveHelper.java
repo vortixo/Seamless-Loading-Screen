@@ -138,8 +138,7 @@ public class OnLeaveHelper {
 
         onceFinished.run();
 
-        onceFinished = () -> {
-        };
+        onceFinished = () -> {};
     }
 
     private static void updateIcon(File iconFile, NativeImage nativeImage) {

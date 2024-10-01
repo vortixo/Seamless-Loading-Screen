@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ServerInfo.class)
-public class ServerInfoMixin implements ServerInfoExtension {
+public abstract class ServerInfoMixin implements ServerInfoExtension {
 
     @Shadow
     public String address;

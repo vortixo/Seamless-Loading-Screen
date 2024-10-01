@@ -41,6 +41,14 @@ public class ScreenshotLoader {
     public static boolean replacebg = false;
     private static String fileName = "";
 
+    public static void endBackgroundReplacment() {
+        replacebg = false;
+    }
+
+    public static boolean shouldReplaceBackground() {
+        return replacebg;
+    }
+
     public static String getFileName() {
         return fileName;
     }
@@ -80,8 +88,7 @@ public class ScreenshotLoader {
     private static void setScreenshot() {
         loaded = false;
 
-        if (displayMode == DisplayMode.DISABLED)
-            return;
+        if (displayMode == DisplayMode.DISABLED) return;
 
         try (InputStream in = new FileInputStream(ScreenshotLoader.fileName)) {
             if (PlatformFunctions.isDevEnv()) {

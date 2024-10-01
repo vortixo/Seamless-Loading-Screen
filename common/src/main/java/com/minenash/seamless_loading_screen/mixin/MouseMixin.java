@@ -9,11 +9,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Mouse.class)
-public class MouseMixin {
+public abstract class MouseMixin {
 
     @Inject(method = "onCursorPos", at = @At("HEAD"), cancellable = true)
     private void pauseMouseMovement(CallbackInfo info) {
         if (SeamlessLoadingScreenConfig.get().disableCamera && ScreenshotLoader.inFade) info.cancel();
     }
-
 }

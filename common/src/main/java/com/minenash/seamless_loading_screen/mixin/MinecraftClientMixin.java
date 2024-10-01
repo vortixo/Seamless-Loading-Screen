@@ -62,7 +62,10 @@ public abstract class MinecraftClientMixin {
 
     @ModifyVariable(method = "setScreen", at = @At(value = "HEAD"), argsOnly = true, index = 1)
     private Screen fadeScreen(Screen screen) {
-        if (currentScreen instanceof DownloadingTerrainScreen && world != null && ScreenshotLoader.loaded && ScreenshotLoader.inFade) {
+        var screenCheck = currentScreen instanceof DownloadingTerrainScreen downloadingTerrainScreen
+                && ((DownloadingTerrainScreenAccessor) downloadingTerrainScreen).sls$shouldClose().getAsBoolean();
+
+        if (screenCheck && world != null && ScreenshotLoader.loaded && ScreenshotLoader.inFade) {
             if (screen == null) {
                 this.seamless_loading_screen$terrainScreenReplaced = true;
 
@@ -70,23 +73,24 @@ public abstract class MinecraftClientMixin {
                     if (!forced) setScreen(null);
                     ScreenshotLoader.inFade = false;
                 });
-            } else {
-                LOGGER.warn("[SeamlessLoadingScreen] Fade screen has been skipped due to someone replacing the screen before we could add our own after DownloadingTerrainScreen");
-
-                ScreenshotLoader.inFade = false;
             }
 
-            ScreenshotLoader.replacebg = false;
+            LOGGER.warn("[SeamlessLoadingScreen] Fade screen has been skipped due to someone replacing the screen before we could add our own after {}", currentScreen.getClass().getSimpleName());
+
+            ScreenshotLoader.inFade = false;
+
+            ScreenshotLoader.endBackgroundReplacment();
         }
+
         return screen;
     }
 
     @Inject(method = "setScreen", at = @At("HEAD"))
     private void failSafe(Screen screen, CallbackInfo ci) {
         //Failsafe injection to prevent mouse lockup or background issues due to other mod injection stuff
-        if ((seamless_loading_screen$terrainScreenReplaced && !(screen instanceof FadeScreen)) || (screen == null && (ScreenshotLoader.inFade || ScreenshotLoader.replacebg))) {
+        if ((seamless_loading_screen$terrainScreenReplaced && !(screen instanceof FadeScreen)) || (screen == null && (ScreenshotLoader.inFade || ScreenshotLoader.shouldReplaceBackground()))) {
             ScreenshotLoader.inFade = false;
-            ScreenshotLoader.replacebg = false;
+            ScreenshotLoader.endBackgroundReplacment();
 
             this.seamless_loading_screen$terrainScreenReplaced = false;
         }

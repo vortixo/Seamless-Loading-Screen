@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(QuickPlay.class)
-public class QuickPlayMixin {
+public abstract class QuickPlayMixin {
 
     @Inject(method = "startSingleplayer", at = @At("HEAD"))
     private static void getLevelName(MinecraftClient client, String levelName, CallbackInfo ci) {

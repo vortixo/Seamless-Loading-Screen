@@ -8,7 +8,6 @@
     "ClientPlayNetworkHandlerMixin",
     "ConnectScreenMixin",
     "CreateWorldScreenMixin",
-    "DownloadingTerrainScreenMixin",
     "GameMenuScreenMixin",
     "GameRendererMixin",
     "LevelLoadingScreenMixin",
@@ -21,7 +20,8 @@
     "custom_screenshots.MultiplayerScreenMixin",
     "custom_screenshots.ServerInfoMixin",
     "realm.RealmsMainScreenMixin",
-    "DebugHudAccesor"
+    "DebugHudAccesor",
+    "DownloadingTerrainScreenAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

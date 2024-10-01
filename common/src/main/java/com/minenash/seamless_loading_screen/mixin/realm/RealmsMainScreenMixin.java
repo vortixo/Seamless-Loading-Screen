@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(RealmsMainScreen.class)
-public class RealmsMainScreenMixin {
+public abstract class RealmsMainScreenMixin {
 
     @Inject(method = "play", at = @At("HEAD"))
     private static void getRealmNameID(RealmsServer realmsServer, Screen parent, CallbackInfo info) {
