@@ -114,7 +114,7 @@ public class FadeScreen extends Screen {
                 loadQuad(context, color, x + w, 0, width, height, (x + w) / 32f, 0, width / 32f, height / 32f);
             }
         } else {
-            RenderSystem.setShaderTexture(0, 0);;
+            RenderSystem.setShaderTexture(0, 0);
             color.set(0.25f, 0.25f, 0.25f, alpha);
             loadQuad(context, color, 0, 0, width, height, 0, 0, width / 32f, height / 32f);
         }
