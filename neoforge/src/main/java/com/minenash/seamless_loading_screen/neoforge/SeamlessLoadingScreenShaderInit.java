@@ -7,13 +7,13 @@ import net.minecraft.client.render.VertexFormats;
 import net.minecraft.util.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterShadersEvent;
 import org.slf4j.Logger;
 
 import java.io.IOException;
 
-@Mod.EventBusSubscriber(modid = SeamlessLoadingScreen.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = SeamlessLoadingScreen.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class SeamlessLoadingScreenShaderInit {
 
     public static Logger LOGGER = LogUtils.getLogger();
@@ -25,7 +25,7 @@ public class SeamlessLoadingScreenShaderInit {
     @SubscribeEvent
     public static void registerShaders(RegisterShadersEvent event) {
         try {
-            event.registerShader(new ShaderProgram(event.getResourceProvider(), new Identifier(SeamlessLoadingScreen.MODID, "blur"), VertexFormats.POSITION), (shaderProgram) -> {
+            event.registerShader(new ShaderProgram(event.getResourceProvider(), Identifier.of(SeamlessLoadingScreen.MODID, "blur"), VertexFormats.POSITION), (shaderProgram) -> {
                 SeamlessLoadingScreen.BLUR_PROGRAM.load(shaderProgram);
             });
         } catch (IOException e) {

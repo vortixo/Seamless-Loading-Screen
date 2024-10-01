@@ -6,6 +6,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.Perspective;
 import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.util.ScreenshotRecorder;
 import net.minecraft.util.Util;
@@ -77,7 +78,7 @@ public class OnLeaveHelper {
     }
 
     /**
-     * Inject after World Rendering within {@link GameRenderer#render(float, long, boolean)} method before {@link MinecraftClient#getWindow()}
+     * Inject after World Rendering within {@link GameRenderer#render(RenderTickCounter, boolean)} method before {@link MinecraftClient#getWindow()}
      */
     public static void takeScreenShot() {
         var client = MinecraftClient.getInstance();

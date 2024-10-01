@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[1,)"
+loaderVersion = "[4,)"
 #issueTrackerURL = "https://github.com/Minenash/Seamless-Loading-Screen/issues"
 license = "MIT"
 
@@ -27,20 +27,20 @@ file="META-INF/accesstransformer.cfg"
 [[dependencies.seamless_loading_screen]]
 modId = "neoforge"
 required  = true
-versionRange = "[20,)"
+versionRange = "[21,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.seamless_loading_screen]]
 modId = "yet_another_config_lib_v3"
 required  = true
-versionRange = "[3.3.0,)"
+versionRange = "[3.5.0,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.seamless_loading_screen]]
 modId = "minecraft"
 required = true
-versionRange = "[1.20.2,)"
+versionRange = "[1.21,)"
 ordering = "NONE"
 side = "BOTH"

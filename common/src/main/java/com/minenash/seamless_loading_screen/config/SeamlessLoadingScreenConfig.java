@@ -20,7 +20,7 @@ public class SeamlessLoadingScreenConfig {
     private static final SafeColorTypeAdapter colorAdapter = new SafeColorTypeAdapter(() -> getDefaults().tintColor);
     private static final ConfigClassHandler<SeamlessLoadingScreenConfig> CONFIG_CLASS_HANDLER = ConfigClassHandler
             .createBuilder(SeamlessLoadingScreenConfig.class)
-            .id(new Identifier("seamless_loading_screen", "config"))
+            .id(Identifier.of("seamless_loading_screen", "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .appendGsonBuilder(builder -> builder.setPrettyPrinting()
                             .disableHtmlEscaping()
@@ -100,7 +100,7 @@ public class SeamlessLoadingScreenConfig {
         return Text.translatable("seamless_loading_screen.config." + id + ".description");
     }
     private static Identifier getImg(String id) {
-        return new Identifier("seamless_loading_screen", "textures/config/" + id + ".webp");
+        return Identifier.of("seamless_loading_screen", "textures/config/" + id + ".webp");
     }
 
     public static YetAnotherConfigLib getInstance() {

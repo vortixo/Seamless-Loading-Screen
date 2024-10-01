@@ -63,7 +63,7 @@ dependencies {
 
     modCompileOnly("maven.modrinth:bedrockify:${rootProject.bedrockify_version}")
 
-    modImplementation ("dev.isxander.yacl:yet-another-config-lib-fabric:${rootProject.yacl_version}")
+    modImplementation ("dev.isxander:yet-another-config-lib:${rootProject.yacl_version}-fabric")
     //include "dev.isxander.yacl:yet-another-config-lib-fabric:${rootProject.yacl_version}"
 
     //modLocalRuntime ("maven.modrinth:fastload:3.4.0")

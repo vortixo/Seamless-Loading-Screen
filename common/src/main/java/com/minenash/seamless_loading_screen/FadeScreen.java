@@ -107,14 +107,14 @@ public class FadeScreen extends Screen {
             loadQuad(context, color, x, y, x + w, y + h);
 
             if (w < width) {
-                RenderSystem.setShaderTexture(0, OPTIONS_BACKGROUND_TEXTURE);
+                RenderSystem.setShaderTexture(0, 0);
                 // 0.25f is from Screen.renderBackgroundTexture vertex colors
                 color.set(0.25f, 0.25f, 0.25f, alpha);
                 loadQuad(context, color, 0, 0, x, height, 0, 0, x / 32f, height / 32f);
                 loadQuad(context, color, x + w, 0, width, height, (x + w) / 32f, 0, width / 32f, height / 32f);
             }
         } else {
-            RenderSystem.setShaderTexture(0, OPTIONS_BACKGROUND_TEXTURE);
+            RenderSystem.setShaderTexture(0, 0);
             color.set(0.25f, 0.25f, 0.25f, alpha);
             loadQuad(context, color, 0, 0, width, height, 0, 0, width / 32f, height / 32f);
         }
@@ -142,13 +142,12 @@ public class FadeScreen extends Screen {
         MatrixStack stack = context.getMatrices();
 
         Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferBuilder = tessellator.getBuffer();
-        bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
+        BufferBuilder builder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
         Matrix4f modelMat = stack.peek().getPositionMatrix();
-        bufferBuilder.vertex(modelMat, x0, y1, 0).texture(u0, v1).color(color.x(), color.y(), color.z(), color.w()).next();
-        bufferBuilder.vertex(modelMat, x1, y1, 0).texture(u1, v1).color(color.x(), color.y(), color.z(), color.w()).next();
-        bufferBuilder.vertex(modelMat, x1, y0, 0).texture(u1, v0).color(color.x(), color.y(), color.z(), color.w()).next();
-        bufferBuilder.vertex(modelMat, x0, y0, 0).texture(u0, v0).color(color.x(), color.y(), color.z(), color.w()).next();
-        tessellator.draw();
+        builder.vertex(modelMat, x0, y1, 0).texture(u0, v1).color(color.x(), color.y(), color.z(), color.w());
+        builder.vertex(modelMat, x1, y1, 0).texture(u1, v1).color(color.x(), color.y(), color.z(), color.w());
+        builder.vertex(modelMat, x1, y0, 0).texture(u1, v0).color(color.x(), color.y(), color.z(), color.w());
+        builder.vertex(modelMat, x0, y0, 0).texture(u0, v0).color(color.x(), color.y(), color.z(), color.w());
+        BufferRenderer.drawWithGlobalProgram(builder.end());
     }
 }

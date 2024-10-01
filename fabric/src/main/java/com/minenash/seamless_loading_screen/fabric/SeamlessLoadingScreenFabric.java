@@ -27,7 +27,7 @@ public class SeamlessLoadingScreenFabric implements ClientModInitializer {
         SeamlessLoadingScreen.onInitializeClient();
 
         CoreShaderRegistrationCallback.EVENT.register(context -> {
-            context.register(new Identifier(SeamlessLoadingScreen.MODID, "blur"), VertexFormats.POSITION, shaderProgram -> {
+            context.register(Identifier.of(SeamlessLoadingScreen.MODID, "blur"), VertexFormats.POSITION, shaderProgram -> {
                 SeamlessLoadingScreen.BLUR_PROGRAM.load(shaderProgram);
             });
         });
