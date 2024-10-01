@@ -13,11 +13,11 @@ public class SeamlessLoadingScreenForge {
 
     public SeamlessLoadingScreenForge(IEventBus modEventBus, Dist dist) {
         //Is this needed?
-        ModLoadingContext.get()
-                .registerExtensionPoint(
-                        IExtensionPoint.DisplayTest.class,
-                        () -> new IExtensionPoint.DisplayTest(() -> IExtensionPoint.DisplayTest.IGNORESERVERONLY, (remote, server) -> true)
-                );
+//        ModLoadingContext.get()
+//                .registerExtensionPoint(
+//                        IExtensionPoint.DisplayTest.class,
+//                        () -> new IExtensionPoint.DisplayTest(() -> IExtensionPoint.DisplayTest.IGNORESERVERONLY, (remote, server) -> true)
+//                );
 
         if(dist.isClient()){
             SeamlessLoadingScreen.onInitializeClient();

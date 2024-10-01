@@ -11,9 +11,7 @@ import net.minecraft.client.gl.ShaderProgram;
 import net.minecraft.client.gl.SimpleFramebuffer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexFormat;
-import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.render.*;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.client.util.Window;
@@ -33,7 +31,7 @@ public class ScreenshotLoader {
 
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final Pattern RESERVED_FILENAMES_PATTERN = Pattern.compile(".*\\.|(?:COM|CLOCK\\$|CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(?:\\..*)?", Pattern.CASE_INSENSITIVE);
-    public static Identifier SCREENSHOT = new Identifier(SeamlessLoadingScreen.MODID, "screenshot");
+    public static Identifier SCREENSHOT = Identifier.of(SeamlessLoadingScreen.MODID, "screenshot");
     public static double imageRatio = 1;
     public static boolean loaded = false;
     public static DisplayMode displayMode = DisplayMode.ENABLED;
@@ -152,19 +150,19 @@ public class ScreenshotLoader {
     //-----
 
     public static void renderBlur(Screen screen, DrawContext context, float size, float quality) {
-        var buffer = Tessellator.getInstance().getBuffer();
+        Tessellator tessellator = Tessellator.getInstance();
         var matrix = context.getMatrices().peek().getPositionMatrix();
 
-        buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION);
-        buffer.vertex(matrix, 0, 0, 0).next();
-        buffer.vertex(matrix, 0, screen.height, 0).next();
-        buffer.vertex(matrix, screen.width, screen.height, 0).next();
-        buffer.vertex(matrix, screen.width, 0, 0).next();
+        BufferBuilder builder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION);
+        builder.vertex(matrix, 0, 0, 0);
+        builder.vertex(matrix, 0, screen.height, 0);
+        builder.vertex(matrix, screen.width, screen.height, 0);
+        builder.vertex(matrix, screen.width, 0, 0);
 
         SeamlessLoadingScreen.BLUR_PROGRAM.setParameters(16, quality, size);
         SeamlessLoadingScreen.BLUR_PROGRAM.use();
 
-        Tessellator.getInstance().draw();
+        BufferRenderer.drawWithGlobalProgram(builder.end());
     }
 
     /**

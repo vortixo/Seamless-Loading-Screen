@@ -51,7 +51,7 @@ public abstract class MinecraftClientMixin {
     public abstract void setScreen(@Nullable Screen screen);
 
     @Inject(method = "joinWorld", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;reset(Lnet/minecraft/client/gui/screen/Screen;)V"))
-    private void changeScreen(ClientWorld world, CallbackInfo ci) {
+    private void changeScreen(ClientWorld world, DownloadingTerrainScreen.WorldEntryReason worldEntryReason, CallbackInfo ci) {
         if (SeamlessLoadingScreen.changeWorldJoinScreen) {
             SeamlessLoadingScreen.changeWorldJoinScreen = false;
             ScreenshotLoader.inFade = true;

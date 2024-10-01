@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = Screen.class, priority = 900)
 public class ScreenMixin {
 
-    @Inject(method = "renderBackgroundTexture", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "renderDarkening(Lnet/minecraft/client/gui/DrawContext;)V", at = @At("HEAD"), cancellable = true)
     private void renderScreenBackground_AfterTexture(DrawContext context, CallbackInfo ci) {
         if (!ScreenshotLoader.replacebg) return;
 
