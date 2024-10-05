@@ -51,4 +51,5 @@
   "seamless_loading_screen.config.blacklistedAddresses.description": "Список адрес серверів, для яких Seamless Loading Screen вимкне себе при підключенні до конфігурації.",
   "seamless_loading_screen.config.saveScreenshotsByUser": "Зберігати Знімки За Користувачем",
   "seamless_loading_screen.config.saveScreenshotsByUser.description": "Спробує використовувати ім'я користувача (якщо воно дійсне) для збереження знімків екрану та уникнення проблем з кількома користувачами."
+  "seamless_loading_screen.keybind.config": "Конфігурація Seamless Loading Screen"
 }
