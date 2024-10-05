@@ -14,7 +14,7 @@ jobs:
           temurin,
         ]
         java: [
-            17
+            21
         ]
         os: [ ubuntu-20.04 ]
     runs-on: ${{ matrix.os }}
